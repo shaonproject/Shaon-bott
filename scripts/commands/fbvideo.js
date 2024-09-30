@@ -24,12 +24,12 @@ module.exports.handleEvent = async function ({ api, event }) {
       const path = __dirname + `/cache/fb_${event.threadID}_${Date.now()}.mp4`;
 
       const res = await axios.get(`${Shaon}/api/facebook?URL=${encodeURIComponent(msg)}`);
-      if (!res.data || !res.data.hd) {
+      if (!res.data || !res.data.result.hd) {
         api.sendMessage("Failed to retrieve video. Please check the link and try again.", event.threadID, event.messageID);
         return;
       }
 
-      const videoBuffer = (await axios.get(res.data.hd, { responseType: "arraybuffer" })).data;
+      const videoBuffer = (await axios.get(res.data.result.hd, { responseType: "arraybuffer" })).data;
       fs.writeFileSync(path, Buffer.from(videoBuffer, 'binary'));
 
       api.sendMessage({
