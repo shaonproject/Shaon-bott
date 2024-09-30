@@ -14,10 +14,8 @@ name: "anime",
     "fs":""
   }
 };
-const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
-  const Shaon = apis.data.api
 
-const videoDATA = `${Shaon}/video/anime`;
+const videoDATA = "https://slc5gv-8888.csb.app/video/anime";
 
 module.exports.onLoad = ({}) => {
   if (!global.nodemodule["fs"].existsSync(__dirname + '/nayan')) {
