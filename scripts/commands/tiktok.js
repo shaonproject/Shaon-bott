@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.config = {
-  name: "tik",
+  name: "tiktok",
   version: "1.0.2",
   permission: 0,
   credits: "Islamick Chat",
