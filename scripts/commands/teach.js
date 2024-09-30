@@ -7,7 +7,7 @@ module.exports.config = {
   version: "0.0.2",
   permission: 0,
   prefix: 'awto',
-  credits: "Nayan",
+  credits: "Shaon Ahmed",
   description: "Teach sim",
   category: "admin",
   usages: "hi = hello",
@@ -17,8 +17,8 @@ module.exports.config = {
   module.exports.run = async function({ api, event, args, Users, Threads, Currencies}) {
     const uid = event.senderID;
     const info = args.join(" ");
-    const apis = await axios.get('https://raw.githubusercontent.com/MOHAMMAD-NAYAN/Nayan/main/api.json')
-  const teach = apis.data.sim
+    const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
+  const teach = apis.data.api
     var id = Object.keys(event.mentions)[0] || event.senderID;
   var nam = await Users.getNameUser(id);
   var ThreadInfo = await api.getThreadInfo(event.threadID);
