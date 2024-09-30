@@ -6,7 +6,7 @@
   "language": "en",
   "notification": false,
   "approval": false,
-  "saveState": true,
+  "saveState": false,
   "BOTNAME": "nayan-bot",
   "PREFIX": "/",
   "OPERATOR": [
@@ -14,7 +14,7 @@
     "100000959749712"
   ],
   "ADMINBOT": [
-    "100000959749712",
+    "100090879572769",
     ""
   ],
   "OWNER": ["100000959749712"], 
