@@ -1,28 +1,30 @@
+/**
+* @Shaon Ahmed 
+* @warn Do not edit code or edit credits
+* @Dont Change This Credits Otherwisw Your Bot Lol
+*/
 module.exports.config = {
-  name: "grammar",
-  version: "2.0.0",
-  permission: 0,
-  credits: "ryuko",
-  description: "grammar is a command that helps improve grammar by suggesting corrections and providing recommendations.",
-  prefix: false,
-  category: "without prefix",
-  usages: "[senteces/paragraph]",
-  cooldowns: 5,
+  name: "janu",
+  version: "11.9.7",
+  permssion: 0,
+  credits: "Shaon Ahmed",
+  prefix:false,
+  description: "SIM",
+  category: "Smi",
+  usages: "janu",
+  cooldowns: 30,
 };
 
-module.exports.run = async function ({ api, event, args }) {
-  const axios = require("axios");
-  const { execSync } = require('child_process');
-  let { threadID, messageID } = event;
-  const mahiro = args.join(" ");
-  if (!mahiro) return api.sendMessage(`syntax error\nuse : ${this.config.name} ${this.config.usages}`, threadID, messageID);
+module.exports.run = async ({ api, event,args }) => {
+const axios = require("axios");
 
-  try {
-    const res = await axios.get(`https://grammarcorrection.mahirochan1.repl.co/grammar?text=${mahiro}`);
-    const { message } = res.data;
-    api.sendMessage(`correct grammar :\n${message}`, threadID, messageID);
-  } catch (error) {
-    console.error(error);
-    api.sendMessage("an error occurred while making the API request.", threadID, messageID);
-  }
-};
+const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
+  const Shaon = apis.data.api
+  
+let query = args.join(" ");
+if (!query)
+    return api.sendMessage(`হুম জান বলো কি বলবা-!!❤️✌️`, event.threadID, event.messageID);
+const res = await axios.get(`${Shaon}/sim?type=ask&ask=${query}`);
+var plaintext = res.data.answer;
+api.sendMessage(plaintext, event.threadID, event.messageID)
+}
