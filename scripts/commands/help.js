@@ -1,103 +1,146 @@
-const axios = require('axios');
-const jimp = require("jimp");
-const fs = require("fs");
 module.exports.config = {
-  name: "help",
-  version: "1.0.2",
-  permission: 0,
-  credits: "NAYAN",
-  description: "beginner's guide",
-  prefix: true,
-  category: "guide",
-  usages: "[Shows Commands]",
-  cooldowns: 5,
-  envConfig: {
-    autoUnsend: true,
-    delayUnsend: 60
-  }
+ name: "help",
+ version: "2.0.0",
+ permssion: 0,
+ credits: "Islamick Chat",
+  prefix:true,
+ description: "commands list",
+ category: "system",
+ usages: "module name",
+ cooldowns: 1,
+ envConfig: {
+  autoUnsend: false,
+  delayUnsend: 300
+ }
 };
 
 module.exports.languages = {
-  "vi": {
-    "moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
-    "helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
-    "user": "Người dùng",
-        "adminGroup": "Quản trị viên nhóm",
-        "adminBot": "Quản trị viên bot"
-  },
-  "en": {
-    "moduleInfo": "「 %1 」\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\n» Module code by %7 «",
-    "helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
-    "user": "Anyone",
-        "adminGroup": "Admin of group",
-        "adminBot": "Admin of bot"
+  'en': {
+    'moduleInfo': "─────[ %1 ]──────\n\nUsage: %3\nCategory: %4\nWaiting time: %5 seconds(s)\nPermission: %6\nDescription: %2\n\nModule coded by %7",
+    'helpList': "[ There are %1 commands on this bot, Use: \"%2help nameCommand\" to know how to use! ]",
+    'user': "User",
+    'adminGroup': "Admin group",
+    'adminBot': "Admin bot"
   }
 };
-
-module.exports.handleEvent = function ({ api, event, getText }) {
-  const { commands } = global.client;
-  const { threadID, messageID, body } = event;
-const fs = require("fs");
-const axios = require("axios");
-  if (!body || typeof body == "undefined" || body.indexOf("help") != 0) return;
-  const splitBody = body.slice(body.indexOf("help")).trim().split(/\s+/);
-  if (splitBody.length == 1 || !commands.has(splitBody[1].toLowerCase())) return;
-  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-  const command = commands.get(splitBody[1].toLowerCase());
-  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-  return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
-}
-
-module.exports. run = async function({ api, event, args, getText }) {
-  const { commands } = global.client;
-  const { threadID, messageID } = event;
-  const command = commands.get((args[0] || "").toLowerCase());
-  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-  const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
-  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-
-  if (!command) {
-    const arrayInfo = [];
-    const page = parseInt(args[0]) || 1;
-    const numberOfOnePage = 10;
-    let i = 0;
-    let msg = "\n";
-
-    for (var [name, value] of (commands)) {
-      name += `  ${value.config.usages}`;
-      arrayInfo.push(name);
+module.exports.handleEvent = function ({
+  api: _0xeaf8a8,
+  event: _0x2db9c7,
+  getText: _0x4f1206
+}) {
+  const {
+    commands: _0x4e6903
+  } = global.client;
+  const {
+    threadID: _0x492d46,
+    messageID: _0x3c3425,
+    body: _0x162fb3
+  } = _0x2db9c7;
+  if (!_0x162fb3 || typeof _0x162fb3 == "undefined" || _0x162fb3.indexOf("help") != 0) {
+    return;
+  }
+  const _0x200156 = _0x162fb3.slice(_0x162fb3.indexOf("help")).trim().split(/\s+/);
+  if (_0x200156.length == 1 || !_0x4e6903.has(_0x200156[1].toLowerCase())) {
+    return;
+  }
+  const _0x28dfc0 = global.data.threadData.get(parseInt(_0x492d46)) || {};
+  const _0x56ce2b = _0x4e6903.get(_0x200156[1].toLowerCase());
+  const _0x1acdb3 = _0x28dfc0.hasOwnProperty("PREFIX") ? _0x28dfc0.PREFIX : global.config.PREFIX;
+  return _0xeaf8a8.sendMessage(_0x4f1206("moduleInfo", _0x56ce2b.config.name, _0x56ce2b.config.description, '' + _0x1acdb3 + _0x56ce2b.config.name + " " + (_0x56ce2b.config.usages ? _0x56ce2b.config.usages : ''), _0x56ce2b.config.commandCategory, _0x56ce2b.config.cooldowns, _0x56ce2b.config.hasPermssion == 0 ? _0x4f1206("user") : _0x56ce2b.config.hasPermssion == 1 ? _0x4f1206("adminGroup") : _0x4f1206("adminBot"), _0x56ce2b.config.credits), _0x492d46, _0x3c3425);
+};
+module.exports.run = function ({
+  api: _0x3fe525,
+  event: _0x15cb6b,
+  args: _0x3f7444,
+  getText: _0xf7e0a3
+}) {
+  const _0x5c2846 = require("axios");
+  const _0xdaffb2 = require("request");
+  const _0x347578 = require("fs-extra");
+  const {
+    commands: _0x1ccd83
+  } = global.client;
+  const _0x334d3e = _0x1ccd83.get((_0x3f7444[0] || '').toLowerCase());
+  const {
+    autoUnsend: _0x48e14c,
+    delayUnsend: _0x3c9817
+  } = global.configModule[this.config.name];
+  if (_0x3f7444[0] == "all") {
+    const _0xae3372 = _0x1ccd83.values();
+    var _0x3d848d = [];
+    var _0x3839b6 = '';
+    for (const _0x58fa72 of _0xae3372) {
+      if (!_0x3d848d.some(_0x460457 => _0x460457.group.toLowerCase() == _0x58fa72.config.commandCategory.toLowerCase())) {
+        _0x3d848d.push({
+          'group': _0x58fa72.config.commandCategory.toLowerCase(),
+          'cmds': [_0x58fa72.config.name]
+        });
+      } else {
+        _0x3d848d.find(_0x3ecf06 => _0x3ecf06.group.toLowerCase() == _0x58fa72.config.commandCategory.toLowerCase()).cmds.push(_0x58fa72.config.name);
+      }
     }
-
-    arrayInfo.sort((a, b) => a.data - b.data);
-
-    const startSlice = numberOfOnePage*page - numberOfOnePage;
-    i = startSlice;
-    const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
-
-    for (let item of returnArray) msg += `╭────────────❍
-╰➤  ${++i} ❯ ${prefix}${item}\n\n`;
-
-    const randomText = [ "Even a small amount of alcohol poured on a scorpion will drive it crazy and sting itself to death."," The crocodile can't stick its tongue out.","The oldest known animal in the world is a 405-year-old male, discovered in 2007.","Sharks, like other fish, have their reproductive organs located in the ribcage.","The eyes of the octopus have no blind spots. On average, the brain of an octopus has 300 million neurons. When under extreme stress, some octopuses even eat their trunks.","An elephant's brain weighs about 6,000g, while a cat's brain weighs only approximately 30g.","Cats and dogs have the ability to hear ultrasound.","Sheep can survive up to 2 weeks in a state of being buried in snow.","The smartest pig in the world is owned by a math teacher in Madison, Wisconsin (USA). It has the ability to memorize worksheets multiplying to 12.","Statistics show that each rattlesnake's mating lasts up to ... more than 22 hours", "Studies have found that flies are deaf.","In a lack of water, kangaroos can endure longer than camels.","","Dogs have 4 toes on their hind legs and 5 toes on each of their front paws.","The average flight speed of honey bees is 24km/h. They never sleep.","Cockroaches can live up to 9 days after having their heads cut off.","If you leave a goldfish in the dark for a long time, it will eventually turn white.","The flying record for a chicken is 13 seconds.","The mosquito that causes the most deaths to humans worldwide is the mosquito.","TThe quack of a duck doesn't resonate, and no one knows why.","Sea pond has no brain. They are also among the few animals that can turn their stomachs inside out.","Termites are active 24 hours a day and they do not sleep. Studies have also found that termites gnaw wood twice as fast when listening to heavy rock music.","Baby giraffes usually fall from a height of 1.8 meters when they are born.", "A tiger not only has a striped coat, but their skin is also streaked with stripes.."," Vultures fly without flapping their wings.","Turkeys can reproduce without mating.","Penguins are the only birds that can swim, but not fly. Nor have any penguins been found in the Arctic."," The venom of the king cobra is so toxic that just one gram can kill 150 people.","The venom of a small scorpion is much more dangerous than the venom of a large scorpion.","The length of an oyster's penis can be so 'monstrous' that it is 20 times its body size!","Rat's heart beats 650 times per minute.","The flea can jump 350 times its body length. If it also possessed that ability, a human would be able to jump the length of a football field once.","The faster the kangaroo jumps, the less energy it consumes.","Elephants are among the few mammals that can't jump! It was also discovered that elephants still stand after death.","Spiders have transparent blood."," Snails breathe with their feet.","Some lions mate more than 50 times a day.","Chuột reproduce so quickly that in just 18 months, from just 2 mice, the mother can give birth to 1 million heirs.","Hedgehog floats on water.","Alex is the world's first African gray parrot to question its own existence: What color am I?.","The reason why flamingos are pink-red in color is because they can absorb pigments from the shells of shrimp and shrimp that they eat every day."," Owls and pigeons can memorize human faces", "Cows are more dangerous than sharks","The single pair of wings on the back and the rear stabilizer help the flies to fly continuously, but their lifespan is not more than 14 days.","With a pair of endlessly long legs that can be up to 1.5 m high and weigh 20-25 kg, the ostrich can run faster than a horse. In addition, male ostriches can roar like a lion.","Kangaroos use their tails for balance, so if you lift a Kangaroo's tail off the ground, it won't be able to jump and stand.","Tigers not only have stripes on their backs but also printed on their skin. Each individual tiger is born with its own unique stripe.","If you are being attacked by a crocodile, do not try to get rid of their sharp teeth by pushing them away. Just poke the crocodile in the eye, that's their weakness.","Fleas can jump up to 200 times their height. This is equivalent to a man jumping on the Empire State Building in New York.","A cat has up to 32 muscles in the ear. That makes them have superior hearing ability","Koalas have a taste that does not change throughout life, they eat almost nothing but .. leaves of the eucalyptus tree.","The beaver's teeth do not stop growing throughout its life. If you do not want the teeth to be too long and difficult to control, the beaver must eat hard foods to wear them down.","Animals living in coastal cliffs or estuaries have extremely weird abilities. Oysters can change sex to match the mating method.","Butterflies have eyes with thousands of lenses similar to those on cameras, but they can only see red, green, and yellow..","Don't try this at home, the truth is that if a snail loses an eye, it can recover.","Giraffes do not have vocal cords like other animals of the same family, their tongues are blue-black.","Dog nose prints are like human fingerprints and can be used to identify different dogs.",];
- /*  var data = ["https://i.imgur.com/XetbfAe.jpg", "https://i.imgur.com/4dwdpG9.jpg", "https://i.imgur.com/9My3K5w.jpg", "https://i.imgur.com/vK67ofl.jpg", "https://i.imgur.com/fGwlsFL.jpg"];
-let link = data[Math.floor(Math.random() * data.length)];
-let path = __dirname + `/cache/help.png`;
-  let image = (
-    await axios.get(link, {
-      responseType: "arraybuffer",
-    })
-  ).data;
-  fs.writeFileSync(path, Buffer.from(image, "utf-8"));*/
-
-
-    const text = `╰➤ 𝗧𝗢𝗧𝗔𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 ${arrayInfo.length}\n𝗨𝗦𝗘【 ${prefix}Help 】𝐏𝐀𝐆𝐄 𝐍𝐎.\n╰➤ «𝐍𝐔𝐌𝐁𝐄𝐑 𝐎𝐅 𝐏𝐀𝐆𝐄» ${page}
-╰➤ https://www.facebook.com/www.xnxx.com169`;
-    return api.sendMessage(`╭──«~»──CMD──«~»──╮\n\nPAGE ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}` + "\n" + msg + "\n" + text, threadID, async (error, info) => {
-      if (autoUnsend) {
-        await new Promise(resolve => setTimeout(resolve, delayUnsend * 100000));
-        return api.unsendMessage(info.messageID);
-      } else return;
+    _0x3d848d.forEach(_0x1aa6e9 => _0x3839b6 += "☂︎ " + (_0x1aa6e9.group.charAt(0).toUpperCase() + _0x1aa6e9.group.slice(1)) + " \n" + _0x1aa6e9.cmds.join(" • ") + "\n\n");
+    return _0x5c2846.get("https://loidsenpaihelpapi.miraiandgoat.repl.co").then(_0x5a0d69 => {
+      let _0x36c952 = _0x5a0d69.data.data.substring(_0x5a0d69.data.data.lastIndexOf('.') + 1);
+      _0x3fe525.getUserInfo(parseInt("100090879572769"), (_0x105425, _0x576534) => {
+        if (_0x105425) {
+          return console.log(_0x105425);
+        }
+        var _0x33db8f = Object.keys(_0x576534);
+        var _0x27c5df = _0x576534[_0x33db8f].name.replace('@', '');
+        let _0x1033fa = function () {
+          _0x3fe525.sendMessage({
+            'body': "Commands list\n\n" + _0x3839b6 + ("\nSpamming the bot are strictly prohibited\n\nTotal Commands: " + _0x1ccd83.size + "\n\nDeveloper:\n" + _0x27c5df),
+            'mentions': [{
+              'tag': _0x27c5df,
+              'id': "100090879572769",
+              'fromIndex': 0x0
+            }],
+            'attachment': _0x347578.createReadStream(__dirname + ("/cache/472." + _0x36c952))
+          }, _0x15cb6b.threadID, (_0x3e0973, _0x389319) => {
+            _0x347578.unlinkSync(__dirname + ("/cache/472." + _0x36c952));
+            if (_0x48e14c == false) {
+              setTimeout(() => {
+                return _0x3fe525.unsendMessage(_0x389319.messageID);
+              }, _0x3c9817 * 1000);
+            } else {
+              return;
+            }
+          }, _0x15cb6b.messageID);
+        };
+        _0xdaffb2(_0x5a0d69.data.data).pipe(_0x347578.createWriteStream(__dirname + ("/cache/472." + _0x36c952))).on("close", _0x1033fa);
+      });
     });
   }
-
-  return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
+  ;
+  if (!_0x334d3e) {
+    const _0x5f14a0 = [];
+    const _0x1620c8 = parseInt(_0x3f7444[0]) || 1;
+    let _0x4608bb = 0;
+    let _0x212543 = '';
+    for (var [_0x227533, _0x238429] of _0x1ccd83) {
+      _0x227533 += '';
+      _0x5f14a0.push(_0x227533);
+    }
+    _0x5f14a0.sort((_0x3190d9, _0x1fac61) => _0x3190d9.data - _0x1fac61.data);
+    const _0x144569 = 30 * _0x1620c8 - 30;
+    _0x4608bb = _0x144569;
+    const _0x103adc = _0x5f14a0.slice(_0x144569, _0x144569 + 30);
+    for (let _0x59fe84 of _0x103adc) _0x212543 += "╰┈➤》/" + _0x59fe84 + "🥰\n";
+    const _0x5a7796 = " 》『𝗦𝗛𝗔𝗢𝗡 𝗣𝗥𝗢𝗝𝗘𝗖𝗧 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧』《\nPage 『" + _0x1620c8 + '/' + Math.ceil(_0x5f14a0.length / 30) + '』';
+    const _0x3849be = "\n━━━━━━━━━━━━━━━━\n\n╰┈➤😘2024🥰 " + global.config.BOTNAME + " 𝗕𝗢𝗧\n\n𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥: 𝗦𝗛𝗔𝗢𝗡 𝗔𝗛𝗠𝗘𝗗\n\n❈:𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗘𝗡𝗚𝗧𝗛: " + _0x5f14a0.length + "\n✥:𝗕𝗢𝗧 𝗡𝗔𝗠𝗘: " + global.config.BOTNAME + "\n❅:𝗣𝗥𝗘𝗙𝗜𝗫: " + global.config.PREFIX + "\n✥:𝗢𝗪𝗡𝗘𝗥 𝗙𝗕:https://www.facebook.com/Hey.Its.Me.Shaon.Ahmed";
+    var _0x99c2d3 = ["https://i.imgur.com/qMe4oK0.jpg", "https://i.imgur.com/CpiigAY.jpg", "https://i.imgur.com/QzN6CGW.jpg", "https://i.imgur.com/ccfEyVR.jpg"];
+    var _0x28631f = () => _0x3fe525.sendMessage({
+      'body': _0x5a7796 + "\n\n" + _0x212543 + _0x3849be,
+      'attachment': _0x347578.createReadStream(__dirname + "/cache/loidbutter.jpg")
+    }, _0x15cb6b.threadID, () => _0x347578.unlinkSync(__dirname + "/cache/loidbutter.jpg"), _0x15cb6b.messageID);
+    return _0xdaffb2(encodeURI(_0x99c2d3[Math.floor(Math.random() * _0x99c2d3.length)])).pipe(_0x347578.createWriteStream(__dirname + "/cache/loidbutter.jpg")).on("close", () => _0x28631f());
+  }
+  const _0x19684f = _0xf7e0a3("moduleInfo", _0x334d3e.config.name, _0x334d3e.config.description, '' + (_0x334d3e.config.usages ? _0x334d3e.config.usages : ''), _0x334d3e.config.commandCategory, _0x334d3e.config.cooldowns, _0x334d3e.config.hasPermssion == 0 ? _0xf7e0a3("user") : _0x334d3e.config.hasPermssion == 1 ? _0xf7e0a3("adminGroup") : _0xf7e0a3("adminBot"), _0x334d3e.config.credits);
+  var _0x99c2d3 = ["https://i.imgur.com/qMe4oK0.jpg", "https://i.imgur.com/CpiigAY.jpg", "https://i.imgur.com/QzN6CGW.jpg", "https://i.imgur.com/ccfEyVR.jpg"];
+  var _0x28631f = () => _0x3fe525.sendMessage({
+    'body': _0x19684f,
+    'attachment': _0x347578.createReadStream(__dirname + "/cache/loidbutter.jpg")
+  }, _0x15cb6b.threadID, () => _0x347578.unlinkSync(__dirname + "/cache/loidbutter.jpg"), _0x15cb6b.messageID);
+  return _0xdaffb2(encodeURI(_0x99c2d3[Math.floor(Math.random() * _0x99c2d3.length)])).pipe(_0x347578.createWriteStream(__dirname + "/cache/loidbutter.jpg")).on("close", () => _0x28631f());
 };
