@@ -14,8 +14,8 @@ module.exports.config = {
 };
 module.exports.run = async ({ api, event, args }) => {
   try { 
-    const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
-  const imgur = apis.data.api
+    const api = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
+  const imgur = api.data.api
     const imageUrl = event.messageReply.attachments[0].url;
     const response = await axios.get(`${imgur}/imgurv2?link=${encodeURIComponent(imageUrl)}`);
         const imgurLink = response.data.uploaded.image;
