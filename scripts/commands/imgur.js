@@ -1,41 +1,22 @@
-const axios = require("axios");
-class Imgur {
-  constructor() {
-    this.clientId = "fc9369e9aea767c", this.client = axios.create({
-      baseURL: "https://api.imgur.com/3/",
-      headers: {
-        Authorization: `Client-ID ${this.clientId}`
-      }
-    })
+module.exports.config = {
+  name: "imgur",
+  version: "1.0.1",
+  permission: 0,
+  credits: "Islamick Cyber Chat",
+  prefix: true,
+  description: "Text translation",
+  category: "media",
+  usages: "[hi/ar/bn/vi/en] [Text]",
+  cooldowns: 5,
+  dependencies: {
   }
-  async uploadImage(url) {
-    return (await this.client.post("image", {
-      image: url
-    })).data.data.link
-  }
+};
+  
+module.exports.run = async ({ api, event }) => {
+const axios = global.nodemodule['axios'];  
+var linkanh = event.messageReply.attachments[0].url || args.join(" ");
+  if(!linkanh) return api.sendMessage('╭•┄┅════❁SHAON PROJECT❁════┅┄•╮\n\n আসসালামু আলাইকুম-!!🖤💫\n আপনি যেই ছোবি টাকে Imgur link বানাতে চান সেই ছোবি টা imgur লিখে রিপ্লাই করুন \n\n╰•┄┅════❁SHAON PROJECT❁════┅┄•╯', event.threadID, event.messageID)
+const res = await axios.get(`https://slc5gv-8888.csb.app/imgurv2?link=${encodeURIComponent(linkanh)}`);    
+var img = res.data.uploaded.image;
+  return api.sendMessage(`"${img}",`, event.threadID, event.messageID);
 }
-class Modules extends Imgur {
-  constructor() {
-    super()
-  }
-  get config() {
-    return {
-      name: "imgur",
-      description: "Upload image to imgur",
-      version: "1.0.0",
-      credits: "Emon",
-      prefix: 'true',
-      cooldown: 5,
-      usage: "imgur <url>",
-      category: "Tools ✅",
-      permssion: 0
-    }
-  }
-  run = async ({ api, event }) => {
-    var array = [];
-    if ("message_reply" != event.type || event.messageReply.attachments.length < 0) return api.sendMessage("🌸একটি ফটো রিপ্লাই করুন✅", event.threadID, event.messageID);
-    for (let { url } of event.messageReply.attachments) await this.uploadImage(url).then((res => array.push(res))).catch((err => console.log(err)));
-    return api.sendMessage(`"${array.join("\n")}",`, event.threadID, event.messageID)
-  }
-}
-module.exports = new Modules;
