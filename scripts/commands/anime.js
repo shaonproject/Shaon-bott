@@ -1,5 +1,5 @@
 module.exports.config = {
-	name: "anime", 
+name: "anime", 
   version: "1.0.0", 
   permission: 0,
   credits: "Nayan",
@@ -14,8 +14,10 @@ module.exports.config = {
     "fs":""
   }
 };
+const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
+  const Shaon = apis.data.api
 
-const videoDATA = "https://5025dd35-d3b6-4e53-8f7e-b40e5488f9dc-00-2xr6zjnwy871b.global.replit.dev/video/anime";
+const videoDATA = `${Shaon}/video/anime`;
 
 module.exports.onLoad = ({}) => {
   if (!global.nodemodule["fs"].existsSync(__dirname + '/nayan')) {
