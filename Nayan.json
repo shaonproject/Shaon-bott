@@ -7,11 +7,11 @@
   "notification": false,
   "approval": false,
   "saveState": false,
-  "BOTNAME": "nayan-bot",
+  "BOTNAME": "SHAON PROJECT",
   "PREFIX": "/",
   "OPERATOR": [
-    "100014896964436",
-    "100000959749712"
+    "100090879572769",
+    ""
   ],
   "ADMINBOT": [
     "100090879572769",
