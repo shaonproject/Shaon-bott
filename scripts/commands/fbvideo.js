@@ -1,62 +1,50 @@
-module.exports = {
-  config:{
-    name: "fbvideo",
-    version: "0.0.2",
-    permission: 0,
-    prefix: true,
-    credits: "Nayan",
-    description: "fb video",
-    category: "user",
-    usages: "",
-    cooldowns: 5,
-},
+const axios = require('axios');
+const fs = require('fs-extra');
+const tinyurl = require("tinyurl");
+module.exports.config = {
+  name: "fb",
+  version: "1.6.9",
+  hasPermission: 0,
+  credit : "Nazrul",
+  prefix: true,
+  description: "Facebook Video Downloader",
+  category: "Downloader",
+  usage: "[just send link]",
+  cooldowns: 2
+};
 
-  languages: {
-    "vi": {},
-        "en": {
-            "missing": '[ ! ] Input link.',
-            "wait": '𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐈𝐍𝐆 𝐕𝐈𝐃𝐄𝐎 𝐅𝐎𝐑 𝐘𝐎𝐔\n\n𝐏𝐋𝐄𝐀𝐒𝐄 𝐖𝟖...',
-          "down": '✅Downloaded Successfully',
-          "error": '❌Error'
-        }
-    },
+module.exports.handleEvent = async function ({ api, event }) {
+  let msg = event.body ? event.body : '';
+  
+  const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
+  const Shaon = apis.data.fb
+  const url = await tinyurl.shorten(data.hd);
+  if (msg.startsWith('https://www.facebook.com') || msg.startsWith('https://fb.watch')) {
+    try {
+      api.sendMessage("🔰 downloading Facebook Video please wait...", event.threadID, event.messageID);
 
-start: async function({ nayan, events, args, lang }) {
-    const axios = require("axios")
-    const request = require("request")
-    const fs = require("fs-extra")
-  const { ytdown, ndown, tikdown, twitterdown } = require("nayan-media-downloader")
-    const { messageID, threadID } = events;
-  if (!args[0]) return nayan.reply(lang("missing"), threadID, messageID);
+      const path = __dirname + `/cache/fb_${event.threadID}_${Date.now()}.mp4`;
 
+      const res = await axios.get(`${Shaon}/api/facebook?URL=${encodeURIComponent(msg)}`);
+      if (!res.data || !res.data.hd) {
+        api.sendMessage("Failed to retrieve video. Please check the link and try again.", event.threadID, event.messageID);
+        return;
+      }
 
-    let np = args.join(" ");
-   if (!args[1]) nayan.reply(lang("wait"), events.threadID, (err, info) => setTimeout(() => { nayan.unsendMessage(info.messageID) }, 20000));
+      const videoBuffer = (await axios.get(res.data.hd, { responseType: "arraybuffer" })).data;
+      fs.writeFileSync(path, Buffer.from(videoBuffer, 'binary'));
 
- try {
-    const res = await ndown(`${np}`);
-console.log(res)
-    var msg = [];
-    let img1 = `${res.data[0].url}`;
+      api.sendMessage({
+        body: `⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆\n\n🔰Downloaded Facebook Video⭕\n\n⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆`,
+        attachment: fs.createReadStream(path)
+      }, event.threadID, () => fs.unlinkSync(path), event.messageID);
 
-
-    let imgs1 = (await axios.get(`${img1}`, {
-        responseType: 'arraybuffer'
-    })).data;
-    fs.writeFileSync(__dirname + "/cache/fbvideo.mp4", Buffer.from(imgs1, "utf-8"));
-    var allimage = [];
-    allimage.push(fs.createReadStream(__dirname + "/cache/fbvideo.mp4"));
-
-    {
-        msg += lang("down")
+    } catch (error) {
+      api.sendMessage(`An error occurred: ${error.message}`, event.threadID, event.messageID);
     }
+  }
+};
 
-    return nayan.reply({
-        body: msg,
-        attachment: allimage
-    }, events.threadID, events.messageID);
-} catch (err) {
-    nayan.reply(lang("error"), events.threadID, events.messageID);  
-   }
-}
+exports.run = function ({ api, event }) {
+  api.sendMessage("Please provide a valid Facebook video link.", event.threadID, event.messageID);
 };
