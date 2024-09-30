@@ -29,8 +29,8 @@ module.exports.run = async ({ api, event, args }) => {
       return api.sendMessage("Please provide a name for the video.", event.threadID, event.messageID);
     }
 
-    const response = await axios.get(`${Shaon}/video/random?name=${encodeURIComponent(videoName)}&url=${encodeURIComponent(imgurLink)}`);
-    api.sendMessage(`💌MASSAGE: URL ADDED SUCCESSFUL\n🟡NAME: ${response.data.name}\n🖇️URL: ${response.data.url}`, event.threadID, event.messageID);
+    const Shaon1 = await axios.get(`${Shaon}/video/random?name=${encodeURIComponent(videoName)}&url=${encodeURIComponent(imgurLink)}`);
+    api.sendMessage(`💌MASSAGE: URL ADDED SUCCESSFUL\n🟡NAME: ${Shaon1.data.name}\n🖇️URL: ${Shaon1.data.url}`, event.threadID, event.messageID);
 
   } catch (e) {
     console.log(e);
