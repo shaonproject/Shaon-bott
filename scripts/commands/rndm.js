@@ -3,30 +3,26 @@ module.exports.config = {
   version: "0.0.2",
   permission: 0,
   prefix: true,
-  credits: "Nayan",
+  credits: "Shaon",
   description: "sad video",
   category: "admin",
   usages: "",
     cooldowns: 5,
 };
 
-
-
-
-
 module.exports.run = async function({ api, event, args }) {
     const axios = require("axios")
     const request = require("request")
     const fs = require("fs-extra")
-  const apis = await axios.get('https://raw.githubusercontent.com/MOHAMMAD-NAYAN/Nayan/main/api.json')
+  const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
   const n = apis.data.api;
-    const res = await axios.get(`${n}/video/mixvideo`);
+    const res = await axios.get(`${n}/video/random`);
     var data = res.data.url;
     var msg = [];
-    let video = `${res.data.url.url}`;
-  let name = `${res.data.url.name}`;
+    let video = `${res.data.url}`;
+  let name = `${res.data.name}`;
     let cp = `${res.data.cp}`
-  let ln = `${res.data.length}`
+  let ln = `${res.data.count}`
 
     let videos = (await axios.get(`${video}`, {
         responseType: 'arraybuffer'
