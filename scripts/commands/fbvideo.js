@@ -1,6 +1,5 @@
 const axios = require('axios');
 const fs = require('fs-extra');
-const tinyurl = require("tinyurl");
 module.exports.config = {
   name: "fb",
   version: "1.6.9",
@@ -18,7 +17,6 @@ module.exports.handleEvent = async function ({ api, event }) {
   
   const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
   const Shaon = apis.data.fb
-  const url = await tinyurl.shorten(data.hd);
   if (msg.startsWith('https://www.facebook.com') || msg.startsWith('https://fb.watch')) {
     try {
       api.sendMessage("🔰 downloading Facebook Video please wait...", event.threadID, event.messageID);
