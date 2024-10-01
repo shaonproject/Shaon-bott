@@ -67,7 +67,7 @@ async function linkanh(choice) {
     "9": "/video/love",
     "10": "/video/cpl",
     "11": "/video/baby",
-    "12": "/video/kosto",
+    "12": "/video/ff",
     "13": "/video/lofi",
     "14": "/video/happy",
     "15": "/video/humaiyun",
