@@ -1,12 +1,12 @@
 {
   "author": "Nayan",
-  "autoRestart": true,
+  "autoRestart": false,
   "accpetPending": false,
   "developermode": false,
   "language": "en",
   "notification": false,
   "approval": false,
-  "saveState": false,
+  "saveState": true,
   "BOTNAME": "SHAON PROJECT",
   "PREFIX": "/",
   "OPERATOR": [
