@@ -23,7 +23,7 @@ module.exports.handleEvent = async function ({ api, event }) {
 
       const path = __dirname + `/cache/fb_${event.threadID}_${Date.now()}.mp4`;
 
-      const res = await axios.get(`${Shaon}/api/facebook?URL=${encodeURIComponent(msg)}`);
+      const res = await axios.get(`${Shaon}/fbdl?url=${encodeURIComponent(msg)}`);
       if (!res.data || !res.data.hd) {
         api.sendMessage("Failed to retrieve video. Please check the link and try again.", event.threadID, event.messageID);
         return;
