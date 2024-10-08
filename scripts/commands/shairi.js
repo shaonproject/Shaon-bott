@@ -21,7 +21,7 @@ module.exports.config = {
   }
 };
 
-var videoDATA = `${await baseApiUrl()}/video/shairi`;
+var videoDATA =[`${await baseApiUrl()}/video/shairi`]
 
 module.exports.onLoad = ({}) => {
   if (!global.nodemodule["fs"].existsSync(__dirname + '/nayan')) {
