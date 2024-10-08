@@ -1,5 +1,11 @@
+const baseApiUrl = async () => {
+  const Shaon = await axios.get(
+    `https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json`,
+  );
+  return Shaon.data.api;
+};
 module.exports.config = {
-	name: "shairi", 
+  name: "shairi", 
   version: "1.0.0", 
   permission: 0,
   credits: "Nayan",
@@ -15,7 +21,7 @@ module.exports.config = {
   }
 };
 
-const videoDATA = "https://slc5gv-8888.csb.app/video/shairi";
+var videoDATA = `${await baseApiUrl()}/video/shairi`;
 
 module.exports.onLoad = ({}) => {
   if (!global.nodemodule["fs"].existsSync(__dirname + '/nayan')) {
