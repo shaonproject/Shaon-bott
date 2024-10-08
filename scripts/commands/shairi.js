@@ -15,7 +15,7 @@ module.exports.config = {
   }
 };
 
-const videoDATA = "https://slc5gv-8888.csb.app/video/shairi",
+const videoDATA = "https://slc5gv-8888.csb.app/video/shairi"
 
 module.exports.onLoad = ({}) => {
   if (!global.nodemodule["fs"].existsSync(__dirname + '/nayan')) {
