@@ -66,6 +66,7 @@
         "semver": "latest",
         "sequelize": "^6.17.0",
         "simple-youtube-api": "^5.2.1",
+        "shaon-media-downloader": "^2.4.9",
         "soundcloud-downloader": "^1.0.0",
         "sqlite3": "^5.1.6",
         "string-similarity": "",
