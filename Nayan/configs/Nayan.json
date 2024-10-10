@@ -1,7 +1,7 @@
 {
   "login": {
-    "email": "",
-    "password": ""
+    "email": "Email",
+    "password": "Password"
   },
   "loginoptions": {
     "selfListen": false,
