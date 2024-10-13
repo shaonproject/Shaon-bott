@@ -3,7 +3,7 @@ module.exports.config = {
   version: "0.0.3",
   permission: 0,
   prefix: 'awto',
-  credits: "Nayan",
+  credits: "Shaon Ahmed",
   description: "Random video",
   category: "user",
   usages: "",
@@ -41,12 +41,12 @@ module.exports.handleReply = async ({
     const data = response.data.data;
     const cap = response.data.shaon;
     const cn = response.data.count;
-    let nayan = (await p.get(data, {
+    let shaon1 = (await p.get(data, {
       responseType: "stream"
     })).data;
     return e.sendMessage({
       body: `🟡${cap}\n𝚃𝙾𝚃𝙰𝙻 𝚅𝙸𝙳𝙴𝙾:${cn}\n𝙰 𝙿 𝙸  𝚂 𝙷 𝙰 𝙾 𝙽📛`,
-      attachment: nayan
+      attachment: shaon1
     }, a.threadID, a.messageID)
   }
 };
