@@ -16,7 +16,7 @@ module.exports.handleEvent = async function ({ api, event }) {
   let msg = event.body ? event.body : '';
   
   const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
-  const Shaon = apis.data.sim
+  const Shaon = apis.data.api
   if (msg.startsWith('https://www.facebook.com') || msg.startsWith('https://fb.watch')) {
     try {
       api.sendMessage("🔰 downloading Facebook Video please wait...", event.threadID, event.messageID);
